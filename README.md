@@ -14,7 +14,12 @@ I changed quite a few things:
 - Added self correction feature that tries to fix issues with generation automatically
 - Finetuned tortoise settings
 - Change terminal logs to show generation details more clearly
+- Saves each generated file as mp3 and preserves them upon new generation
+- Changed the way as audio files were saved avoiding any quality loss
 
 Instructions are coming soon on how to install it and what to pay attention to
+
+Download finetuned models from and place them to ~/.cache/tortoise/models/ folder:
+https://huggingface.co/jbetker/tortoise-tts-finetuned-lj
 
 Instructional video:
