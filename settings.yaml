@@ -25,4 +25,4 @@ text: Insert your text here for your audio book, or use the file selector option
   in this project!
 top_p: 0.8
 voice: kathleen01
-voice_fixer: false
+voice_fixer: true
