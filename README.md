@@ -5,7 +5,7 @@
 
 Click below to listen to the audio sample:
 
-[![Audio Sample](https://img.shields.io/badge/Play-AudioSample-blue.svg)](https://github.com/georgecsaszargit/tortoise_audio_book_creator/blob/master/demo.mp3)
+[![Audio Sample](https://img.shields.io/badge/Play-AudioSample-blue.svg)](https://github.com/georgecsaszargit/tortoise_audio_book_creator.git/raw/main/demo.mp3)
 
 This repo is a fork of the tortoise-fast repo: https://github.com/152334H/tortoise-tts-fast.git
 which was created from the repo: https://github.com/neonbjb/tortoise-tts.git
