@@ -1,5 +1,5 @@
 <h2>This is an audiobook creator using Tortoise TTS</h2>
-<h6>With this repo you will be able to generate super high quality audio books using ai models locally on your computer. (No internet connection is needed)</h6>
+<h6>With this repo you will be able to generate super high quality audio books using ai models locally on your computer for absolutely FREE. (No internet connection is needed)</h6>
 
 This repo is a fork of the tortoise-fast repo: https://github.com/152334H/tortoise-tts-fast.git
 which was created from the repo: https://github.com/neonbjb/tortoise-tts.git
