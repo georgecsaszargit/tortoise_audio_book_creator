@@ -217,13 +217,13 @@ def main():
     file_list_models = sorted(file_list_models)
     file_list_models.insert(0,"autoregressive.pth")
     
+    ar_index = 0
     if loaded_settings.get('select_ar_checkpoint') and loaded_settings['select_ar_checkpoint'] != None:
+        
         for ind, v in enumerate(file_list_models):
             if v == loaded_settings['select_ar_checkpoint']:
                 ar_index = ind
-    else:
-        ar_index = 0
-
+    
     with col_ar:
         select_ar_checkpoint = st.selectbox(
             "Model",
@@ -377,14 +377,13 @@ def main():
                 help="How voice samples should be averaged together.",
                 index=latent_averaging_mode_ind,
             )
-
+            
+            sampler_ind = 2
             if loaded_settings.get('sampler') and loaded_settings['sampler'] != None:
                 for ind, v in enumerate(SAMPLERS):
                     if v == loaded_settings['sampler']:
                         sampler_ind = ind
-            else:
-                sampler_ind = 2
-
+            
             sampler = st.radio(
                 "Sampler",
                 SAMPLERS,
