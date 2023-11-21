@@ -29,6 +29,7 @@ last_difference_in_words = 0
 current_chunk = None
 error_score1 = 0 #Total number of self correcting rounds
 error_score2 = 0 #Sum word diff value for all self correcting rounds
+error_score3 = 0 #Total number of failed self correcting rounds
 
 def draw_text_to_canvas(text, font_spacing):
     # Create a PIL image to draw the text with ample space, assuming maximum width for now.
@@ -237,6 +238,7 @@ def infer_on_texts(
     global current_chunk
     global error_score1
     global error_score2
+    global error_score3
     # Reset vars   
     round_before_self_correcting = True 
     rounds = 0
@@ -244,6 +246,7 @@ def infer_on_texts(
     current_chunk = None
     error_score1 = 0
     error_score2 = 0
+    error_score3 = 0
     #---------
     
     audio_chunks = []
@@ -337,6 +340,7 @@ def infer_on_texts(
                     global round_before_self_correcting
                     global error_score1
                     global error_score2
+                    global error_score3
                                         
                     if round_before_self_correcting != True:
                         rounds += 1
@@ -402,6 +406,7 @@ def infer_on_texts(
 
                                 rounds = 0
                                 round_before_self_correcting = True
+                                error_score3 += 1
 
                         else:
                             print("\n")
@@ -419,6 +424,7 @@ def infer_on_texts(
                         
                         rounds = 0
                         round_before_self_correcting = True
+                        error_score3 += 1
                 
                 cust_generate2(text, max_self_correcting_rounds)
                 audio_chunks.append(current_chunk[1])
@@ -428,7 +434,8 @@ def infer_on_texts(
     print("\n")
     printx("ERROR REPORT")
     print("\n")
-    print("Total number of self correcting rounds: " + str(error_score1))
+    print("Failed self correcting rounds: " + str(error_score3))
+    print("Total self correcting rounds: " + str(error_score1))
     print("Sum word diff for all self correcting rounds: " + str(error_score2))
     print("\n")
 
