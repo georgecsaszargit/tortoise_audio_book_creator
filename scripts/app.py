@@ -38,7 +38,7 @@ voice_count = 1
 loaded_settings = {}
 
 # Function to save settings
-def save_settings(text, voice, max_self_correcting_rounds, select_ar_checkpoint, split_length,short_break_val,long_break_val,acceptable_diff,acceptable_char_diff,preset,candidates,latent_averaging_mode,sampler,steps,seed,voice_fixer,output_path,length_penalty_val,repetition_penalty_val,top_p_val,cvvp_amount_val,temperature_val,diffusion_temperature_val,low_vram,max_mel_tokens):
+def save_settings(text, voice, max_self_correcting_rounds, select_ar_checkpoint, split_length,short_break_val,long_break_val,acceptable_diff,acceptable_char_diff,sampleFile,pitchDiff,preset,candidates,latent_averaging_mode,sampler,steps,seed,voice_fixer,output_path,length_penalty_val,repetition_penalty_val,top_p_val,cvvp_amount_val,temperature_val,diffusion_temperature_val,low_vram,max_mel_tokens):
     
     if low_vram == True:
         low_vram = False
@@ -55,6 +55,8 @@ def save_settings(text, voice, max_self_correcting_rounds, select_ar_checkpoint,
         "long_break_val": long_break_val,
         "acceptable_diff": acceptable_diff,
         "acceptable_char_diff": acceptable_char_diff,
+        "sampleFile": sampleFile,
+        "pitchDiff": pitchDiff,
         "preset": preset,
         "candidates": candidates,
         "latent_averaging_mode": latent_averaging_mode,
@@ -73,6 +75,11 @@ def save_settings(text, voice, max_self_correcting_rounds, select_ar_checkpoint,
         "max_mel_tokens": max_mel_tokens,
     }
     
+    try:
+        os.remove("settings.yaml")
+    finally:
+        pass
+
     with open("settings.yaml", "w") as f:
         yaml.dump(settings, f)
         
@@ -101,6 +108,8 @@ def load_settings():
     loaded_settings['long_break_val'] = settings.get("long_break_val", None)
     loaded_settings['acceptable_diff'] = settings.get("acceptable_diff", None)
     loaded_settings['acceptable_char_diff'] = settings.get("acceptable_char_diff", None)
+    loaded_settings['sampleFile'] = settings.get("sampleFile", None)
+    loaded_settings['pitchDiff'] = settings.get("pitchDiff", None)
     loaded_settings['preset'] = settings.get("preset", None)
     loaded_settings['candidates'] = settings.get("candidates", None)
     loaded_settings['latent_averaging_mode'] = settings.get("latent_averaging_mode", None)
@@ -315,6 +324,29 @@ def main():
                 min_value=0, 
                 max_value=100,
             )
+
+            if loaded_settings.get('sampleFile') and loaded_settings['sampleFile'] != None:
+                samplefile_val = loaded_settings['sampleFile']
+            else:
+                samplefile_val = 'nofile.wav'
+
+            sampleFile = user_input = st.text_input(
+                "Reference pitch file path (Optional. Needed if you want to verify pitch of generated audio)", 
+                value=samplefile_val
+            )
+                
+            if loaded_settings.get('pitch_diff') and loaded_settings['pitch_diff'] != None:
+                pitch_diff_val = loaded_settings['pitch_diff']
+            else:
+                pitch_diff_val = 30
+
+            pitchDiff = st.number_input(
+                "Pitch diff threashold",
+                help="The pitch difference threshold in Hz",
+                value=pitch_diff_val,
+                min_value=0, 
+                max_value=10000,
+            )
             
 
     with st.expander("Advanced Settings"):
@@ -494,7 +526,7 @@ def main():
                 
             # Create buttons 
             if st.button("Save Settings"):
-                save_settings(text, voice, max_self_correcting_rounds, select_ar_checkpoint, split_length,short_break_val,long_break_val,acceptable_diff,acceptable_char_diff,preset,candidates,latent_averaging_mode,sampler,steps,seed,voice_fixer,output_path,length_penalty,repetition_penalty,top_p,cvvp_amount,temperature,diffusion_temperature,high_vram,max_mel_tokens)
+                save_settings(text, voice, max_self_correcting_rounds, select_ar_checkpoint, split_length,short_break_val,long_break_val,acceptable_diff,acceptable_char_diff,sampleFile,pitchDiff,preset,candidates,latent_averaging_mode,sampler,steps,seed,voice_fixer,output_path,length_penalty,repetition_penalty,top_p,cvvp_amount,temperature,diffusion_temperature,high_vram,max_mel_tokens)
 
             if st.button("Reset Settings"):
                 reset_settings()
@@ -757,6 +789,8 @@ def main():
                         long_break_val,
                         acceptable_diff,
                         acceptable_char_diff,
+                        sampleFile,
+                        pitchDiff,
                         whisp_model,
                         return_deterministic_state=True,
                         return_filepaths=True,
