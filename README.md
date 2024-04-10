@@ -17,7 +17,7 @@ I changed quite a few things:
 - Added the ability to add pauses to generation. Single or double line breaks create short pause and more than 2 lines breaks a long pause that can be configured from streamlit gui
 - Changed the UI quite a bit to optimize it for audio book creation
 - Ability to load in a file
-- Added self correction feature that tries to fix issues with generation automatically
+- Added self correction feature that tries to fix issues with generation automatically (word, char differences, and pitch control)
 - Finetuned tortoise settings
 - Change terminal logs to show generation details more clearly
 - Saves each generated file as mp3 and preserves them upon new generation
