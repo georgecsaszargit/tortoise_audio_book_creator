@@ -37,6 +37,7 @@ I only have tested it on Linux. I tried it on Ubuntu 22.04, 23.10, and Manjaro L
 
 <h2>Here are the steps:</h2>
 Download Miniconda from: https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html<br>
+Install it without sudo rights for current user
 Create conda environment: conda create -n [env_name] python==3.9 numba inflect<br>
 Activate conda: conda activate [env_name]<br>
 Clone this repo: git clone https://github.com/georgecsaszargit/tortoise_audio_book_creator.git<br>
