@@ -18,6 +18,8 @@ from tortoise.utils.audio import get_voices, load_audio, load_voices
 from tortoise.utils.text import split_and_recombine_text
 from drawille import Canvas
 from PIL import Image, ImageDraw, ImageFont
+import numpy as np
+from scipy import signal
 
 
 # Ensure you've downloaded the necessary NLTK data
@@ -29,6 +31,7 @@ last_difference_in_words = 0
 current_chunk = None
 error_score1 = 0 #Total number of self correcting rounds
 error_score2 = 0 #Sum word diff value for all self correcting rounds
+error_score25 = 0 #Sum pitch diff value for all self correcting rounds
 error_score3 = 0 #Total number of failed self correcting rounds
 
 def draw_text_to_canvas(text, font_spacing):
@@ -215,6 +218,50 @@ def compare_before_after_generation(before, after, acceptable_diff, acceptable_c
 
     return {"compare_pass": compare_pass, "difference_in_words": difference_in_words}
 
+def compare_before_after_generation2(audio_file, sampleFile, acceptable_pitch_diff):
+    if not os.path.exists(sampleFile):
+        #printx("Reference file not found",10)
+        return True
+    
+    # Load the reference (good) audio file
+    reference_file = sampleFile
+    y_ref, sr_ref = librosa.load(reference_file)
+
+    # Extract pitch contour for the reference audio
+    pitch_ref, voiced_flag_ref, voiced_probs_ref = librosa.pyin(y_ref, fmin=librosa.note_to_hz('C2'), fmax=librosa.note_to_hz('C4'), sr=sr_ref)
+
+    # Remove non-finite values from the pitch contour
+    pitch_ref = pitch_ref[np.isfinite(pitch_ref)]
+
+    # Load the audio file to compare
+    compare_file = audio_file
+    y_compare, sr_compare = librosa.load(compare_file)
+
+    # Extract pitch contour for the audio file to compare
+    pitch_compare, voiced_flag_compare, voiced_probs_compare = librosa.pyin(y_compare, fmin=librosa.note_to_hz('C2'), fmax=librosa.note_to_hz('C4'), sr=sr_compare)
+
+    # Remove non-finite values from the pitch contour
+    pitch_compare = pitch_compare[np.isfinite(pitch_compare)]
+
+    # Resample the pitch contours to a common length
+    max_length = max(len(pitch_ref), len(pitch_compare))
+    pitch_ref_resampled = signal.resample(pitch_ref, max_length)
+    pitch_compare_resampled = signal.resample(pitch_compare, max_length)
+
+    # Calculate the mean absolute difference between the resampled pitch contours
+    pitch_diff = np.mean(np.abs(pitch_ref_resampled - pitch_compare_resampled))
+
+    # Set a threshold for pitch difference
+    pitch_threshold = acceptable_pitch_diff  # Adjust this value based on your requirements
+
+    # Compare the pitch difference with the threshold
+    if pitch_diff < pitch_threshold:
+        #print("good")
+        return True
+    else:
+        #print("bad")
+        return False
+
 def infer_on_texts(
     call_tts: Callable[[str], Any],
     texts: List[str],
@@ -223,6 +270,8 @@ def infer_on_texts(
     long_break_val: int,
     acceptable_diff: 0,
     acceptable_char_diff: 0,
+    sampleFile: str,
+    pitchDiff: int,
     whisp_model: str,
     return_deterministic_state: bool,
     lines_to_regen: Set[int],
@@ -238,7 +287,9 @@ def infer_on_texts(
     global current_chunk
     global error_score1
     global error_score2
+    global error_score25
     global error_score3
+    
     # Reset vars   
     round_before_self_correcting = True 
     rounds = 0
@@ -246,6 +297,7 @@ def infer_on_texts(
     current_chunk = None
     error_score1 = 0
     error_score2 = 0
+    error_score25 = 0
     error_score3 = 0
     #---------
     
@@ -340,6 +392,7 @@ def infer_on_texts(
                     global round_before_self_correcting
                     global error_score1
                     global error_score2
+                    global error_score25
                     global error_score3
                                         
                     if round_before_self_correcting != True:
@@ -358,13 +411,15 @@ def infer_on_texts(
                         result = model.transcribe(str(current_chunk[0][0]))
                         print('new  - ' + result['text'].lstrip())
                         
-                        # Compare
+                        # Compare using whisper
                         compare_passed = compare_before_after_generation(text.lower(), result['text'].lower(), acceptable_diff, acceptable_char_diff)
+                        # Compare pitch to sample audio
+                        compare_passed2 = compare_before_after_generation2(current_chunk[0][0], sampleFile, pitchDiff)
                         
                         # If generation failed
-                        if not compare_passed['compare_pass']:
+                        if not compare_passed['compare_pass'] or not compare_passed2:
                             error_score1 += 1
-                            error_score2 += compare_passed['difference_in_words']
+                            #error_score2 += compare_passed['difference_in_words']
 
                             if rounds == 0:
                                 # First generation
@@ -391,16 +446,23 @@ def infer_on_texts(
                                 #printx("Backed up wav to temp",10)
                             
                             if rounds != max_self_correcting_rounds:
-                                print("\n")                                                              
-                                printx("DIFF:" + str(compare_passed['difference_in_words']), 10)
+                                print("\n")      
+                                if not compare_passed['compare_pass']:
+                                    error_score2 += compare_passed['difference_in_words']
+                                    printx("WORD DIFF:" + str(compare_passed['difference_in_words']), 10)
+                                if not compare_passed2:
+                                    error_score25 += 1
+                                    printx("PITCH DIFF: yes", 10)
                                 printx("SELF CORRECT " + str(rounds + 1) + "/" + str(max_self_correcting_rounds), 10)
                                 print("\n")
                                 
                                 cust_generate2(text, max_self_correcting_rounds)
                             else:
                                 print("\n")                                                              
-                                printx("DIFF:" + str(compare_passed['difference_in_words']), 10)
-                                print("\n")
+                                if not compare_passed['compare_pass']:
+                                    printx("WORD DIFF:" + str(compare_passed['difference_in_words']), 10)
+                                if not compare_passed2:
+                                    printx("PITCH DIFF: yes", 10)
                                 printx("STOP", 10)
                                 print("\n")
 
@@ -437,6 +499,7 @@ def infer_on_texts(
     print("Failed self correcting rounds: " + str(error_score3))
     print("Total self correcting rounds: " + str(error_score1))
     print("Sum word diff for all self correcting rounds: " + str(error_score2))
+    print("Sum pitch diff for all self correcting rounds: " + str(error_score25))
     print("\n")
 
     fnames = []
