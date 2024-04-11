@@ -46,7 +46,13 @@ Activate conda: conda activate [env_name]<be>
 
 Download finetuned models and place them to ~/.cache/tortoise/models/ folder from:<br>
 https://huggingface.co/jbetker/tortoise-tts-finetuned-lj<br>
-(These models are better than the original tortoise models)<br>
+(These models are better than the original tortoise models)<be>
+git clone https://huggingface.co/jbetker/tortoise-tts-finetuned-lj
+cd tortoise-tts-finetuned-lj
+git lfs fetch --all
+git lfs checkout
+mkdir -p tortoise/models
+cp * ~/.cache/tortoise/models
 <br>
 Instructional video: coming soon...<br>
 <br><br>
