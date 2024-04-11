@@ -35,23 +35,20 @@ Installation
 ---------------------------------------------------
 I only tested it on Ubuntu 22.04 Linux.
 
-<h2>Here are the steps:</h2>
-Install latest proprietary nvidia driver<br>
-sudo apt install git git-lfs perl make ffmpeg nvidia-cuda-toolkit nvidia-cudnn libportaudio2<br>
-Download Miniconda from: https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html<br>
-Install it without sudo rights for current user<br>
-Restart computer<br>
-Create conda env: conda env create -f environment-new.yml<br>
-Activate conda: conda activate tortoiseaudiobook<br>
-python -m pip install -r requirements-new.txt<br>
-Download finetuned models and place them to ~/.cache/tortoise/models/ folder from:<br>
-https://huggingface.co/jbetker/tortoise-tts-finetuned-lj<br>
-(These models are better than the original tortoise models)<br>
-git clone https://huggingface.co/jbetker/tortoise-tts-finetuned-lj<br>
-cd tortoise-tts-finetuned-lj<br>
-git lfs fetch --all<br>
-git lfs checkout<br>
-mkdir -p tortoise/models<br>
-cp * ~/.cache/tortoise/models<br>
-<br>
-Instructional video: coming soon...<br>
+<p>Here are the steps:</p>
+<ol>
+    <li>Install latest proprietary nvidia driver</li>
+    <li>Install Ubuntu packages<br>sudo apt install git git-lfs perl make ffmpeg nvidia-cuda-toolkit nvidia-cudnn libportaudio2</li>
+    <li>Download Miniconda from: <a target="_blank" rel="noopener noreferrer" href="https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html">https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html</a></li>
+    <li>Install it without sudo rights for current user</li>
+    <li>Restart computer</li>
+    <li>Clone this repo<br>git clone <a target="_blank" rel="noopener noreferrer" href="https://github.com/georgecsaszargit/tortoise_audio_book_creator.git">https://github.com/georgecsaszargit/tortoise_audio_book_creator.git</a></li>
+    <li>CD into the repo folder where you can see the requirements-new.txt</li>
+    <li>Create conda env:<br>conda env create -f environment-new.yml</li>
+    <li>Activate conda:&nbsp;<br>conda activate tortoiseaudiobook</li>
+    <li>Install python packages using pip:<br>python -m pip install -r requirements-new.txt</li>
+    <li>Install tortoise module:<br>python -m pip install -e .</li>
+    <li>Download finetuned models and place them to ~/.cache/tortoise/models/ folder from: <a target="_blank" rel="noopener noreferrer" href="https://huggingface.co/jbetker/tortoise-tts-finetuned-lj">https://huggingface.co/jbetker/tortoise-tts-finetuned-lj </a>(These models are better than the original tortoise models):<br>git clone <a target="_blank" rel="noopener noreferrer" href="https://huggingface.co/jbetker/tortoise-tts-finetuned-lj">https://huggingface.co/jbetker/tortoise-tts-finetuned-lj</a><br>cd tortoise-tts-finetuned-lj<br>git lfs fetch --all<br>git lfs checkout<br>mkdir -p ~/.cache/tortoise/models<br>cp * ~/.cache/tortoise/models</li>
+    <li>Run tortoise:<br>streamlit run scripts/app.py</li>
+</ol>
+<p>Instructional video: coming soon…</p>
