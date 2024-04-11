@@ -1,4 +1,4 @@
-name: tortoisefast2
+name: tortoiseaudiobook
 channels:
   - pytorch
   - nvidia
@@ -288,4 +288,4 @@ dependencies:
       - webencodings==0.5.1
       - whisper==1.1.10
       - zipp==3.15.0
-prefix: /home/george/miniconda3/envs/tortoisefast2
+prefix: /home/george/miniconda3/envs/tortoiseaudiobook
