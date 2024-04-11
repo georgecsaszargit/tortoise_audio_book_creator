@@ -168,7 +168,6 @@ tqdm
 traitlets==5.11.2
 trampoline==0.1.2
 transformers
--e git+https://github.com/georgecsaszargit/tortoise_audio_book_creator.git#egg=tortoise
 triton==2.0.0
 typing_extensions
 tzdata==2023.3
