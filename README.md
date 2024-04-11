@@ -36,23 +36,23 @@ Installation
 I only tested it on Ubuntu 22.04 Linux.
 
 <h2>Here are the steps:</h2>
-Install latest proprietary nvidia driver
-sudo apt install git git-lfs perl make ffmpeg nvidia-cuda-toolkit nvidia-cudnn libportaudio2
+Install latest proprietary nvidia driver<br>
+sudo apt install git git-lfs perl make ffmpeg nvidia-cuda-toolkit nvidia-cudnn libportaudio2<br>
 Download Miniconda from: https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html<br>
-Install it without sudo rights for current user
-Restart computer
-Create conda env: conda env create -f environment-new.yml
-Activate conda: conda activate tortoiseaudiobook<be>
-python -m pip install -r requirements-new.txt
+Install it without sudo rights for current user<br>
+Restart computer<br>
+Create conda env: conda env create -f environment-new.yml<br>
+Activate conda: conda activate tortoiseaudiobook<br>
+python -m pip install -r requirements-new.txt<br>
 Download finetuned models and place them to ~/.cache/tortoise/models/ folder from:<br>
 https://huggingface.co/jbetker/tortoise-tts-finetuned-lj<br>
-(These models are better than the original tortoise models)<be>
-git clone https://huggingface.co/jbetker/tortoise-tts-finetuned-lj
-cd tortoise-tts-finetuned-lj
-git lfs fetch --all
-git lfs checkout
-mkdir -p tortoise/models
-cp * ~/.cache/tortoise/models
+(These models are better than the original tortoise models)<br>
+git clone https://huggingface.co/jbetker/tortoise-tts-finetuned-lj<br>
+cd tortoise-tts-finetuned-lj<br>
+git lfs fetch --all<br>
+git lfs checkout<br>
+mkdir -p tortoise/models<br>
+cp * ~/.cache/tortoise/models<br>
 <br>
 Instructional video: coming soon...<br>
 <br><br>
