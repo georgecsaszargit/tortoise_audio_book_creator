@@ -40,10 +40,10 @@ Install latest proprietary nvidia driver
 sudo apt install git git-lfs perl make ffmpeg nvidia-cuda-toolkit nvidia-cudnn libportaudio2
 Download Miniconda from: https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html<br>
 Install it without sudo rights for current user
-
-Create conda environment: conda create -n [env_name] python==3.9 numba inflect<br>
-Activate conda: conda activate [env_name]<be>
-
+Restart computer
+Create conda env: conda env create -f environment-new.yml
+Activate conda: conda activate tortoiseaudiobook<be>
+python -m pip install -r requirements-new.txt
 Download finetuned models and place them to ~/.cache/tortoise/models/ folder from:<br>
 https://huggingface.co/jbetker/tortoise-tts-finetuned-lj<br>
 (These models are better than the original tortoise models)<be>
