@@ -33,26 +33,17 @@ Nvidia RTX 4090 (with Cuda 11.8)
 ---------------------------------------------------
 Installation
 ---------------------------------------------------
-I only have tested it on Linux. I tried it on Ubuntu 22.04, 23.10, and Manjaro Linux
+I only tested it on Ubuntu 22.04 Linux.
 
 <h2>Here are the steps:</h2>
+Install latest proprietary nvidia driver
+sudo apt install git git-lfs perl make ffmpeg nvidia-cuda-toolkit nvidia-cudnn libportaudio2
 Download Miniconda from: https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html<br>
 Install it without sudo rights for current user
+
 Create conda environment: conda create -n [env_name] python==3.9 numba inflect<br>
-Activate conda: conda activate [env_name]<br>
-Clone this repo: git clone https://github.com/georgecsaszargit/tortoise_audio_book_creator.git<br>
-Then install modules:<br>
-python -m pip install pyyaml<br>
-python -m pip install nltk<br>
-python -m pip install pydub<br>
-python -m pip install streamlit<br>
-python -m pip install librosa<br>
-python -m pip install sounddevice<br>
-python -m pip install fuzzywuzzy<br>
-python -m pip install drawille<br>
-python -m pip install pillow<br>
-python -m pip install git+https://github.com/openai/whisper.git<br>
-python -m pip install -e .<br>
+Activate conda: conda activate [env_name]<be>
+
 Download finetuned models and place them to ~/.cache/tortoise/models/ folder from:<br>
 https://huggingface.co/jbetker/tortoise-tts-finetuned-lj<br>
 (These models are better than the original tortoise models)<br>
