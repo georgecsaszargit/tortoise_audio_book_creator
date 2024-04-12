@@ -10,6 +10,7 @@ attrs==23.1.0
 audioread==3.0.0
 auraloss==0.4.0
 beautifulsoup4==4.12.2
+BigVGAN @ git+https://github.com/georgecsaszargit/BigVGAN.git
 bleach==6.1.0
 blinker==1.6.2
 boltons==23.0.0
