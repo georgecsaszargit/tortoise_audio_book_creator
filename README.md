@@ -46,7 +46,7 @@ I only tested it on Ubuntu 22.04 Linux.
     <li>CD into the repo folder where you can see the requirements-new.txt</li>
     <li>Create conda env:<br>conda env create -f environment-new.yml</li>
     <li>Activate conda:&nbsp;<br>conda activate tortoiseaudiobook</li>
-    <li>Install python packages using pip:<br>python -m pip install -r requirements-new.txt</li>
+    <li>Install python packages using pip:<br>python -m pip install -r requirements-rtx3090.txt</li>
     <li>Install tortoise module:<br>python -m pip install -e .</li>
     <li>Download finetuned models and place them to ~/.cache/tortoise/models/ folder from: <a target="_blank" rel="noopener noreferrer" href="https://huggingface.co/jbetker/tortoise-tts-finetuned-lj">https://huggingface.co/jbetker/tortoise-tts-finetuned-lj </a>(These models are better than the original tortoise models):<br>git clone <a target="_blank" rel="noopener noreferrer" href="https://huggingface.co/jbetker/tortoise-tts-finetuned-lj">https://huggingface.co/jbetker/tortoise-tts-finetuned-lj</a><br>cd tortoise-tts-finetuned-lj<br>git lfs fetch --all<br>git lfs checkout<br>mkdir -p ~/.cache/tortoise/models<br>cp * ~/.cache/tortoise/models</li>
     <li>Run tortoise:<br>streamlit run scripts/app.py</li>
