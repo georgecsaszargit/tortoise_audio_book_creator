@@ -51,4 +51,4 @@ I only tested it on Ubuntu 22.04 Linux.
     <li>Download finetuned models and place them to ~/.cache/tortoise/models/ folder from: <a target="_blank" rel="noopener noreferrer" href="https://huggingface.co/csdzs/tortoise-audio-book-creator">https://huggingface.co/csdzs/tortoise-audio-book-creator </a>(These models are better than the original tortoise models):<br>git clone <a target="_blank" rel="noopener noreferrer" href="https://huggingface.co/csdzs/tortoise-audio-book-creator">https://huggingface.co/csdzs/tortoise-audio-book-creator</a><br>cd tortoise-audio-book-creator<br>git lfs fetch --all<br>git lfs checkout<br>mkdir -p ~/.cache/tortoise/models<br>cp * ~/.cache/tortoise/models</li>
     <li>Run tortoise:<br>streamlit run scripts/app.py</li>
 </ol>
-<p>Instructional video: coming soon…</p>
+<p>Instructional video: https://youtu.be/BCCMB0p4fC8?si=5pHqHb8nZCSa_ExO</p>
