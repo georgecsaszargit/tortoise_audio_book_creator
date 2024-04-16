@@ -42,13 +42,12 @@ Installation
     <li>Install it without sudo rights for current user</li>
     <li>Restart computer</li>
     <li>Clone this repo<br>git clone <a target="_blank" rel="noopener noreferrer" href="https://github.com/georgecsaszargit/tortoise_audio_book_creator.git">https://github.com/georgecsaszargit/tortoise_audio_book_creator.git</a></li>
-    <li>CD into the repo folder where you can see the requirements-rtx3090.txt</li>
+    <li>CD into the repo folder where you can see the requirements-new.txt</li>
     <li>Create conda env:<br>conda env create -f environment-new.yml</li>
     <li>Activate conda:&nbsp;<br>conda activate tortoiseaudiobook</li>
     <li>Install python packages using pip:<br>python -m pip install -r requirements-rtx3090.txt</li>
     <li>Install tortoise module:<br>python -m pip install -e .</li>
-    <li>Download finetuned models and place them to ~/.cache/tortoise/models/ folder from: <a target="_blank" rel="noopener noreferrer" href="https://huggingface.co/csdzs/tortoise-audio-book-creator">https://huggingface.co/csdzs/tortoise-audio-book-creator </a>(These models are better than the original tortoise models)<br>cd into a different temporary directory to download the model files, then manually copy over the pth files to ~/.cache/tortoise/models/&nbsp;<br>git clone <a target="_blank" rel="noopener noreferrer" href="https://huggingface.co/csdzs/tortoise-audio-book-creator">https://huggingface.co/csdzs/tortoise-audio-book-creator</a><br>cd tortoise-audio-book-creator<br>git lfs fetch --all<br>git lfs checkout<br>mkdir -p ~/.cache/tortoise/models<br>cd <a target="_blank" rel="noopener noreferrer" href="https://huggingface.co/csdzs/tortoise-audio-book-creator">tortoise-audio-book-creator</a></li>
-    <li>cp * ~/.cache/tortoise/models</li>
+    <li>Download finetuned models and place them to ~/.cache/tortoise/models/ folder from: <a target="_blank" rel="noopener noreferrer" href="https://huggingface.co/csdzs/tortoise-audio-book-creator">https://huggingface.co/csdzs/tortoise-audiobook-creator-finetuned-models</a>(These models are better than the original tortoise models)<br>git clone <a target="_blank" rel="noopener noreferrer" href="https://huggingface.co/csdzs/tortoise-audio-book-creator">https://huggingface.co/csdzs/tortoise-audiobook-creator-finetuned-models</a><br>cd tortoise-audiobook-creator-finetuned-models<br>git lfs fetch --all<br>git lfs checkout<br>mkdir -p ~/.cache/tortoise/models<br>cp * ~/.cache/tortoise/models</li>
     <li>Run tortoise:<br>streamlit run scripts/app.py</li>
 </ol>
 <p>Instructional video: https://youtu.be/BCCMB0p4fC8?si=5pHqHb8nZCSa_ExO</p>
