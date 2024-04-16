@@ -42,7 +42,7 @@ Installation
     <li>Install it without sudo rights for current user</li>
     <li>Restart computer</li>
     <li>Clone this repo<br>git clone <a target="_blank" rel="noopener noreferrer" href="https://github.com/georgecsaszargit/tortoise_audio_book_creator.git">https://github.com/georgecsaszargit/tortoise_audio_book_creator.git</a></li>
-    <li>CD into the repo folder where you can see the requirements-new.txt</li>
+    <li>CD into the repo folder where you can see the requirements-rtx3090.txt</li>
     <li>Create conda env:<br>conda env create -f environment-new.yml</li>
     <li>Activate conda:&nbsp;<br>conda activate tortoiseaudiobook</li>
     <li>Install python packages using pip:<br>python -m pip install -r requirements-rtx3090.txt</li>
