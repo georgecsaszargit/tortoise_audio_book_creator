@@ -93,7 +93,7 @@ nvidia-cublas-cu11==11.10.3.66
 nvidia-cuda-nvrtc-cu11==11.7.99
 nvidia-cuda-runtime-cu11==11.7.99
 nvidia-cudnn-cu11==8.5.0.96
-openai-whisper==20230918
+openai-whisper==20231117
 packaging==23.0
 pandas==1.5.3
 pandocfilters==1.5.0
