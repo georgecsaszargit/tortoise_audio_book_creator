@@ -47,6 +47,8 @@ Installation
     <li>Activate conda:&nbsp;<br>conda activate tortoiseaudiobook</li>
     <li>Install python packages using pip:<br>python -m pip install -r requirements-rtx3090.txt</li>
     <li>Install tortoise module:<br>python -m pip install -e .</li>
+    <li>ONLY ON RTX4090 do this 1 following line</li>
+    <li>pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118li>
     <li>Download finetuned models and place them to ~/.cache/tortoise/models/ folder from: <a target="_blank" rel="noopener noreferrer" href="https://huggingface.co/csdzs/tortoise-audio-book-creator">https://huggingface.co/csdzs/tortoise-audiobook-creator-finetuned-models</a>(These models are better than the original tortoise models)<br>git clone <a target="_blank" rel="noopener noreferrer" href="https://huggingface.co/csdzs/tortoise-audio-book-creator">https://huggingface.co/csdzs/tortoise-audiobook-creator-finetuned-models</a><br>cd tortoise-audiobook-creator-finetuned-models<br>git lfs fetch --all<br>git lfs checkout<br>mkdir -p ~/.cache/tortoise/models<br>cp * ~/.cache/tortoise/models</li>
     <li>cd 1 level up and run tortoise:<br>cd ..<br>streamlit run scripts/app.py</li>
 </ol>
